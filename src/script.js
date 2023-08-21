@@ -17,7 +17,7 @@ let element = "hsl(200, 15%, 8%)"
 
 
 function fetchData() {
-  fetch('/public/data.json')
+  fetch('data.json')
     .then((res) => res.json())
     .then(data => {
       datas = data;
