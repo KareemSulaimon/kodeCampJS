@@ -68,7 +68,7 @@ function listCountries() {
 const countryElements = finalCountries.map(country => {
   
   const aElement = document.createElement('a');
-  aElement.href = `src/country.html?name=${encodeURIComponent(country.name)}`;
+  aElement.href = `country.html?name=${encodeURIComponent(country.name)}`;
   aElement.id = 'fetchCountry';
   aElement.className = 'headingBg';
 
