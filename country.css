@@ -166,23 +166,13 @@
   #country-detail {
     padding: 10px 50px;
   }
-  
-  
- 
-  
-  /* .countrySub {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
-  } */
-  
-  
+
   
   #country {
     flex-direction: column;
     gap: 50px;
     align-items: center;
+    margin-top: 50px;
   }
   
   .countryImg {
