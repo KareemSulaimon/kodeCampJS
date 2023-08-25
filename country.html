@@ -38,20 +38,26 @@
       .then(data => {
         // find a particular country which country is equal to countryName
         const country = data.find(country => country.name === countryName);
+        console.log(country)
 
         if (country) {
-          const borderList = document.createElement('ul');
-          borderList.textContent = "Bounder Countries :"
-          borderList.className = "textColor"
-          borderList.className = "borders"
+          const borderList = document.createElement('div');
+          borderList.className = "borders textColor"
+          borderList.innerHTML = "<h3 class='textColor'>Bounder Countries :</h3>"
+
           const borders = country.borders;
-          borders.forEach(border => {
-            const borderItem = document.createElement('li');
+
+          if(borders) {
+            borders.forEach(border => {
+            const borderItem = document.createElement('span');
             borderItem.textContent = border;
-            borderItem.className = "bordersspan"
-            borderItem.className = "textColor"
+            borderItem.className = "textColor bordersspan"
             borderList.appendChild(borderItem);
           });
+          } else {
+            borderList.innerHTML = `<h3 class='textColor'>Bounder Countries </h3>: ${country.name}does not have a border`
+          }
+          
 
           countryDetailContainer.innerHTML = `
             <div id="all">
@@ -109,7 +115,7 @@
                       </h3>
                     </div>
                   </div>
-                  <span ${borderList.outerHTML}</span>
+                  <div class="borders textColor"> ${borderList.outerHTML} </div>
                 </div>
               </div>
             </div>
