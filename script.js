@@ -259,6 +259,4 @@ fetch("/data.json")
       countryDetailContainer.innerHTML = '<p>Country not found.</p>';
     }
   })
-  .catch(error => {
-    console.error('Error loading data:', error);
-  });
+  
