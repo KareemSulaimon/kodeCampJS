@@ -158,43 +158,40 @@ document.querySelectorAll(".element").forEach(v => v.style.color = element);
 
 })
 
-
-
-// country detail
-const countryDetailContainer = document.getElementById('country-detail');
-
 // Get the country name from the URL query parameter
 const urlParams = new URLSearchParams(window.location.search);
 const countryName = urlParams.get('name');
 
 // Load data.json using fetch and render country details
 fetch("/data.json")
-.then((res) => res.json())
+  .then((res) => res.json())
   .then(data => {
-    // find a particular country which country is equal to countryName
+    // Find a particular country which country name is equal to countryName
     const country = data.find(country => country.name === countryName);
-    console.log(country)
+
+    // Get the country detail container
+    const countryDetailContainer = document.getElementById('country-detail');
 
     if (country) {
       const borderList = document.createElement('div');
-      borderList.className = "borders textColor"
-      borderList.innerHTML = "<h3 class='textColor'>Bounder Countries :</h3>"
+      borderList.className = "borders textColor";
+      borderList.innerHTML = "<h3 class='textColor'>Border Countries:</h3>";
 
       const borders = country.borders;
 
-      if(borders) {
+      if (borders) {
         borders.forEach(border => {
-        const borderItem = document.createElement('span');
-        borderItem.textContent = border;
-        borderItem.className = "textColor bordersspan"
-        borderList.appendChild(borderItem);
-      });
+          const borderItem = document.createElement('span');
+          borderItem.textContent = border;
+          borderItem.className = "textColor bordersspan";
+          borderList.appendChild(borderItem);
+        });
       } else {
-        borderList.innerHTML = `<h3 class='textColor'>Bounder Countries </h3>: ${country.name}does not have a border`
+        borderList.innerHTML = `<h3 class='textColor'>Border Countries:</h3> ${country.name} does not have a border`;
       }
-      
 
-      countryDetailContainer.innerHTML = `
+      // Construct the country detail HTML
+      const countryDetailHTML = `
         <div id="all">
           <div class="countrySub">
             <a href="/" class="textColor headingBg">
@@ -203,7 +200,7 @@ fetch("/data.json")
                   d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
                   fill="currentColor"></path>
               </svg>
-              <h3 class="textColor">back</h3>
+              <h3 class="textColor">Back</h3>
             </a>
           </div>
           <div id="country">
@@ -215,7 +212,7 @@ fetch("/data.json")
               <div class="countryInfoSub">
                 <div class="countryInfoSubsOne">
                   <h3 class="element">
-                    <span>Native Name : </span>
+                    <span>Native Name: </span>
                     ${country.nativeName}
                   </h3>
                   <h3 class="element">
@@ -250,11 +247,14 @@ fetch("/data.json")
                   </h3>
                 </div>
               </div>
-              <div class="borders textColor"> ${borderList.outerHTML} </div>
+              <div class="borders textColor">${borderList.outerHTML}</div>
             </div>
           </div>
         </div>
       `;
+
+      // Insert the country detail HTML into the container
+      countryDetailContainer.innerHTML = countryDetailHTML;
     } else {
       countryDetailContainer.innerHTML = '<p>Country not found.</p>';
     }
