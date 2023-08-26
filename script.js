@@ -163,7 +163,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const countryName = urlParams.get('name');
 
 // Load data.json using fetch and render country details
-fetch("/data.json")
+fetch("data.json")
   .then((res) => res.json())
   .then(data => {
     // Find a particular country which country name is equal to countryName
@@ -251,7 +251,7 @@ fetch("/data.json")
             </div>
           </div>
         </div>
-      `;
+      `
 
       // Insert the country detail HTML into the container
       countryDetailContainer.innerHTML = countryDetailHTML;
