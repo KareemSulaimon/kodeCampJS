@@ -120,10 +120,10 @@ const countryElements = finalCountries.map(country => {
 
 // Append country elements to the designated element
 const fetchDataElement = document.getElementById('fetchData');
-   fetchDataElement.innerHTML = ''; 
-   countryElements.map(element => fetchDataElement.appendChild(element));
+countryElements.map(element => fetchDataElement.appendChild(element));
+console.log(fetchDataElement)
+
  }
- 
  
 
 //  change Bg onclick
@@ -158,105 +158,3 @@ document.querySelectorAll(".element").forEach(v => v.style.color = element);
 
 })
 
-// Get the country name from the URL query parameter
-const urlParams = new URLSearchParams(window.location.search);
-const countryName = urlParams.get('name');
-
-// Load data.json using fetch and render country details
-fetch("data.json")
-  .then((res) => res.json())
-  .then(data => {
-    // Find a particular country which country name is equal to countryName
-    const country = data.find(country => country.name === countryName);
-
-    // Get the country detail container
-    const countryDetailContainer = document.getElementById('country-detail');
-
-    if (country) {
-      const borderList = document.createElement('div');
-      borderList.className = "borders textColor";
-      borderList.innerHTML = "<h3 class='textColor'>Border Countries:</h3>";
-
-      const borders = country.borders;
-
-      if (borders) {
-        borders.forEach(border => {
-          const borderItem = document.createElement('span');
-          borderItem.textContent = border;
-          borderItem.className = "textColor bordersspan";
-          borderList.appendChild(borderItem);
-        });
-      } else {
-        borderList.innerHTML = `<h3 class='textColor'>Border Countries:</h3> ${country.name} does not have a border`;
-      }
-
-      // Construct the country detail HTML
-      const countryDetailHTML = `
-        <div id="all">
-          <div class="countrySub">
-            <a href="/" class="textColor headingBg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="element">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-                  fill="currentColor"></path>
-              </svg>
-              <h3 class="textColor">Back</h3>
-            </a>
-          </div>
-          <div id="country">
-            <div class="countryImg">
-              <img src="${country.flag}" alt="country flag" />
-            </div>
-            <div class="countryInfo">
-              <h1 class="textColor">${country.name}</h1>
-              <div class="countryInfoSub">
-                <div class="countryInfoSubsOne">
-                  <h3 class="element">
-                    <span>Native Name: </span>
-                    ${country.nativeName}
-                  </h3>
-                  <h3 class="element">
-                    <span>Population: </span>
-                    ${country.population}
-                  </h3>
-                  <h3 class="element">
-                    <span>Region: </span>
-                    ${country.region}
-                  </h3>
-                  <h3 class="element">
-                    <span>Sub-Region: </span>
-                    ${country.subregion}
-                  </h3>
-                  <h3 class="element">
-                    <span>Capital: </span>
-                    ${country.capital}
-                  </h3>
-                </div>
-                <div class="countryInfoSubsOne">
-                  <h3 class="element">
-                    <span>Top Level Domain: </span>
-                    ${country.topLevelDomain}
-                  </h3>
-                  <h3 class="element">
-                    <span>Currencies: </span>
-                    ${country.currencies[0]?.name}
-                  </h3>
-                  <h3 class="element">
-                    <span>Languages: </span>
-                    ${country.languages.map(lang => lang.name).join(', ')}
-                  </h3>
-                </div>
-              </div>
-              <div class="borders textColor">${borderList.outerHTML}</div>
-            </div>
-          </div>
-        </div>
-      `
-
-      // Insert the country detail HTML into the container
-      countryDetailContainer.innerHTML = countryDetailHTML;
-    } else {
-      countryDetailContainer.innerHTML = '<p>Country not found.</p>';
-    }
-  })
-  
